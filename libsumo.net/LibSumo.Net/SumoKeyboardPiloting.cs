@@ -29,7 +29,7 @@ namespace LibSumo.Net
         private bool KEY_RIGHT;
         private bool PilotingThreadStarted = false;
         private bool KeyboardThreadStarted = false;
-        private bool Should_run { get; set; }
+        public bool Should_run { get; set; }
         #endregion
 
         public BlockingCollection<KeyValuePair<HookUtils.VirtualKeyStates, bool>> CurrentKeyStack { get; set; }

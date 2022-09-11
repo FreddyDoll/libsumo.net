@@ -23,8 +23,8 @@ using System.Threading.Tasks;
 using System.Net.NetworkInformation;
 using System.Threading;
 using System.Collections.Generic;
-
-
+using BrandonPotter.XBox;
+using System.Windows.Threading;
 
 namespace SumoApplication
 {
@@ -36,7 +36,10 @@ namespace SumoApplication
     {
         private SumoController controller;
         private SumoKeyboardPiloting piloting;
-        private SumoInformations sumoInformations;        
+        private SumoInformations sumoInformations;
+
+        XBoxControllerWatcher watcher = new BrandonPotter.XBox.XBoxControllerWatcher();
+        XBoxController activeController = null;
 
         // Framerate calculation
         private double frameRate;
@@ -62,6 +65,26 @@ namespace SumoApplication
         {
 
             InitializeComponent();
+
+            watcher.ControllerConnected += (c)=>
+            {
+                if (activeController == null)
+                {
+                    activeController = c;
+                }
+            };
+            watcher.ControllerDisconnected += (c) =>
+            {
+                if (activeController == c)
+                {
+                    activeController = null;
+                }
+            };
+            var tim = new DispatcherTimer();
+            tim.Tick += RunXboxControlelr;
+            tim.Interval = TimeSpan.FromMilliseconds(10);
+            tim.Start();
+
             sumoInformations = new SumoInformations();
 
             LOGGER.GetInstance.MessageAvailable += GetInstance_MessageAvailable;
@@ -79,6 +102,66 @@ namespace SumoApplication
             SetSplashImage();
 
             InitDrone();
+
+            CompositionTarget.Rendering += RunXboxControlelr;
+        }
+
+
+        double filtTur = 0;
+        double filtSpeed = 0;
+
+        private void RunXboxControlelr(object sender, EventArgs e)
+        {
+            if (activeController == null || controller == null || !controller.IsConnected)
+            {
+                piloting.Should_run = true;
+                return;
+            }
+            piloting.Should_run = false;
+            if (activeController.ButtonAPressed)
+                controller.StartJump(SumoEnumGenerated.Jump_type.high);
+            if (activeController.ButtonBPressed)
+                controller.ChangePostures(LibSumo.Net.Protocol.SumoEnumGenerated.Posture_type.jumper);
+            if (activeController.ButtonXPressed)
+                controller.StartJump(SumoEnumGenerated.Jump_type._long);
+            if (activeController.ButtonYPressed)
+                controller.ChangePostures(LibSumo.Net.Protocol.SumoEnumGenerated.Posture_type.standing);
+
+
+            if (activeController.ButtonUpPressed)
+                controller.QuickTurn((float)Math.PI);
+            if (activeController.ButtonDownPressed)
+                controller.QuickTurn((float)Math.PI);
+            if (activeController.ButtonLeftPressed)
+                controller.QuickTurn(0.75f * (float)Math.PI);
+            if (activeController.ButtonRightPressed)
+                controller.QuickTurn(0.5f*(float)Math.PI);
+
+
+             var speed = (-activeController.TriggerLeftPosition + activeController.TriggerRightPosition) /100;
+             var turn = (activeController.ThumbLeftX -50) /100;
+
+            var c1Turn = 0.8;
+            filtTur = filtTur * c1Turn + (1 - c1Turn) * turn;
+            var c1speed = 0.8;
+            filtSpeed = filtSpeed * c1speed + (1 - c1speed) * speed;
+
+            speed = filtSpeed;
+            turn = filtTur;
+
+            speed *= 127;
+            turn *= 127;
+
+            //Limit
+            if (speed > 127) speed = 127;
+            if (speed < -127) speed = -127;
+
+            //Limit
+            if (turn > 100) turn = 100;
+            if (turn < -100) turn = -100;
+
+            controller.SendMove((sbyte)(speed), (sbyte)(turn));
+
         }
 
         private void SetSplashImage()
@@ -94,7 +177,8 @@ namespace SumoApplication
 
         private void InitDrone()
         {
-            if(controller==null)
+
+            if (controller==null)
                 controller = new SumoController(out piloting);
 
             controller.ImageAvailable += Controller_ImageAvailable;
