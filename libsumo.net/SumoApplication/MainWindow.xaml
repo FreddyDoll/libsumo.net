@@ -5,77 +5,98 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SumoApplication"
         mc:Ignorable="d"
-        MinHeight="630" MinWidth="1024"
         Title="MainWindow"  Width="887" Height="539">
-    <Grid>
-        <DockPanel  LastChildFill="True">
 
-            <Canvas Name="panelJump"  DockPanel.Dock="Top"  Height="50">
-                <Label x:Name="lblFramerate" Content="Framerate" Canvas.Left="17" Canvas.Top="3" />
-                <Button x:Name="btnLongJump" Content="Long Jump"  Width="75" Canvas.Left="109" Canvas.Top="19" Click="BtnLongJump_Click"/>
-                <Button x:Name="btnHighJump" Content="High Jump"  Width="75" Canvas.Left="209" Canvas.Top="19" Click="BtnHighJump_Click"/>
-                <Button x:Name="btnKick" Content="Load Spring"  Width="75" Canvas.Left="309" Canvas.Top="19" Click="BtnKick_Click" ToolTip="Only in Kicker Posture (F2). Press LongJump to release"/>
-                <Button x:Name="btnCancelJump" Content="Cancel Jump"  Width="75" Canvas.Left="409" Canvas.Top="19" Click="BtnCancelJump_Click"/>
-                <Button x:Name="btnSTOP" Content="STOP"  Width="75" Click="BtnSTOP_Click" Canvas.Left="514" Canvas.Top="19" ToolTip="Emergency Stop. Stop all action of JumpingSumo and Stay Here"/>
-            </Canvas>
+    <DockPanel  LastChildFill="True">
+        <StackPanel Name="panelJump"  DockPanel.Dock="Top"  Orientation="Horizontal">
+            <Label x:Name="lblFramerate" Content="Framerate" Canvas.Left="17" Canvas.Top="3" />
+            <Button x:Name="btnLongJump" Content="Long Jump"  Width="75" Canvas.Left="109" Canvas.Top="19" Click="BtnLongJump_Click"/>
+            <Button x:Name="btnHighJump" Content="High Jump"  Width="75" Canvas.Left="209" Canvas.Top="19" Click="BtnHighJump_Click"/>
+            <Button x:Name="btnKick" Content="Load Spring"  Width="75" Canvas.Left="309" Canvas.Top="19" Click="BtnKick_Click" ToolTip="Only in Kicker Posture (F2). Press LongJump to release"/>
+            <Button x:Name="btnCancelJump" Content="Cancel Jump"  Width="75" Canvas.Left="409" Canvas.Top="19" Click="BtnCancelJump_Click"/>
+            <Button x:Name="btnSTOP" Content="STOP"  Width="75" Click="BtnSTOP_Click" Canvas.Left="514" Canvas.Top="19" ToolTip="Emergency Stop. Stop all action of JumpingSumo and Stay Here"/>
+        </StackPanel>
 
-            <Canvas Width="120">
-                <Button Name="btnConnect" Content="Connect local"  Width="105" Click="BtnConnect_Click" Canvas.Left="10" Canvas.Top="11"/>
-                <Button Name="btnDisconnect" Content="Disconnect"  Width="105" Click="BtnDisconnect_Click" Canvas.Left="10" Canvas.Top="41"/>
-                <Button Name="btnEnableMultiDrones" Content="EnableMultiDrones"  Width="105" Click="btnEnableMultiDrones_Click" Canvas.Left="10" Canvas.Top="71"/>
-                <StackPanel x:Name="stckPanel1" Height="250" Width="120"  Canvas.Top="100" />
-                <StackPanel x:Name="stckPanel2"  Width="120" Canvas.Top="375">
-                    <Button Name="btnSaveLog" Content="Save log" Width="95" Click="BtnSaveLog_Click"  Margin="5,5,5,5"/>
-                    <Button Name="btnSimulate" Content="Simulate" Width="95" Click="btnSimulate_Click" Margin="5,5,5,5"/>
-                    <Button Name="btnRecordVideo" Content="rec video 10s" Width="95" Click="btnRecordVideo_Click" Margin="5,5,5,5"/>
-                </StackPanel>
-                <TextBox Name="FakeTxtBox" Height="23" Canvas.Left="23" TextWrapping="Wrap"  Canvas.Top="467" Width="34" Opacity="0"/>
-            </Canvas>
-
-            <TextBox DockPanel.Dock="Bottom" Height="150" Name="txtBox" TextWrapping="NoWrap" Text="" GotFocus="TxtBox_GotFocus"  />
-
-            <Canvas Name="panelSettings"  DockPanel.Dock="Right" Width="502">
-
-                <GroupBox x:Name="pnlAudio" Header="Audio Streaming" Height="179" Canvas.Left="262" Canvas.Top="10" Width="230">
-                    <Canvas>
-                        <Button x:Name="btnAudioStreamOn" Content="Audio On"  Width="75" Click="BtnAudioStreamOn_Click" Canvas.Left="10" Canvas.Top="10"/>
-                        <Button x:Name="btnAudioStreamOff" Content="Audio Off"  Width="75" Click="BtnAudioStreamOff_Click" Canvas.Left="90" Canvas.Top="10"/>
-                        <ComboBox x:Name="cbxSounds" HorizontalAlignment="Left" VerticalAlignment="Top" Width="155" Canvas.Left="10" Canvas.Top="50"/>
-                        <Button x:Name="btnAudioRecord" Content="Send Sound"  Width="155" Click="BtnAudioRecord_Click" Canvas.Left="10" Canvas.Top="77"/>
-                        <Button Content="Button" Canvas.Left="183" Canvas.Top="52" Width="25" Click="Button_Click"/>
-                    </Canvas>
-                </GroupBox>
-                <GroupBox Header="Accessories" Height="179" Canvas.Left="262" Canvas.Top="200" Width="230">
-                    <Canvas>
-                        <CheckBox x:Name="chkBowl"  Content="Bowl" Canvas.Left="10" Canvas.Top="10" ToolTip="Disable jump if I wear Bowl" Checked="ChkBowl_Checked" Unchecked="ChkBowl_Unchecked" />
-                        <CheckBox x:Name="chkBox" IsEnabled="False" Content="Automatic Box (y:open x:close)" Canvas.Left="10" Canvas.Top="36" />
-                        <CheckBox x:Name="chkBoost" IsEnabled="False" Content="Boost Speed (4)" Canvas.Left="10" Canvas.Top="63"  />
-                        <Slider x:Name="slLight"  Canvas.Left="10" Canvas.Top="123" Width="182" ValueChanged="SlLight_ValueChanged" Maximum="255" SmallChange="0"/>
-                        <Label Content="Light (e:on q:off) :" Canvas.Left="10" Canvas.Top="92" Height="26" Width="103"/>
-                    </Canvas>
-                </GroupBox>
-
-                <GroupBox x:Name="pnlSettings" Header="Settings" Height="369" Canvas.Left="10" Canvas.Top="10" Width="230">
-                    <Canvas>
-                        <Slider x:Name="slVolume" Maximum="100" Canvas.Left="115" Canvas.Top="18" Width="81" Thumb.DragCompleted="SlVolume_DragCompleted"/>
-                        <Label Content="Volume" Canvas.Left="35" Canvas.Top="18"/>
-                        <Label Content="Audio Theme" Canvas.Left="10" Canvas.Top="54"/>
-                        <ComboBox x:Name="cbxAudioTheme" Canvas.Left="115" Canvas.Top="54" Width="81" SelectionChanged="CbxAudioTheme_SelectionChanged"/>
-
-                        <Label Content="Wifi Band" Canvas.Left="30" Canvas.Top="85" RenderTransformOrigin="0.508,-0.179"/>
-                        <ComboBox x:Name="cbxWifiBand" Canvas.Left="115" Canvas.Top="85" Width="81" SelectionChanged="cbxWifiBand_SelectionChanged"/>
-                    </Canvas>
-                </GroupBox>
-
-
-            </Canvas>
-            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-                <Label x:Name="lblBatteryLevel" Content="BatteryLevel : N/A" Canvas.Left="25" Canvas.Top="212" RenderTransformOrigin="1.347,1.974" />
-                <Label x:Name="lblRssi" Content="Rssi : N/A" Canvas.Left="25" Canvas.Top="243" />
-                <Label x:Name="lblPostureState" Content="PostureStateName : N/A" Canvas.Left="25" Canvas.Top="300" />
-                <Label x:Name="lblQuality" Content="Quality link: N/A" Canvas.Left="25" Canvas.Top="269" />
+        <DockPanel>
+            <StackPanel x:Name="stckPanel2"  Canvas.Top="375" DockPanel.Dock="Bottom">
+                <Button Name="btnSaveLog" Content="Save log"  Click="BtnSaveLog_Click"  />
+                <Button Name="btnSimulate" Content="Simulate"  Click="btnSimulate_Click" />
+                <Button Name="btnRecordVideo" Content="rec video 10s"  Click="btnRecordVideo_Click" />
             </StackPanel>
-            <Image  Name="imgMain" MouseLeftButtonDown="ImgMain_MouseLeftButtonDown"/>
+
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top">
+                    <Button Name="btnConnect" Content="Connect local"  Width="105" Click="BtnConnect_Click" />
+                    <Button Name="btnDisconnect" Content="Disconnect"  Width="105" Click="BtnDisconnect_Click" />
+                    <Button Name="btnEnableMultiDrones" Content="EnableMultiDrones"  Width="105" Click="btnEnableMultiDrones_Click" />
+                    <Button x:Name="enableVideo" Content="Enable Video" Click="enableVideo_Click" />
+                    <Button x:Name="disableVideo" Content="Disable Video" Click="disableVideo_Click"/>
+                    <Button x:Name="wifi" Content="WIFI" Click="wifi_Click"/>
+                    <TextBox Name="FakeTxtBox" Height="23" Canvas.Left="23" TextWrapping="Wrap"  Canvas.Top="467" Width="34" Opacity="0"/>
+                </StackPanel>
+                <StackPanel x:Name="stckPanel1"/>
+            </DockPanel>
         </DockPanel>
-    </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="150"/>
+            </Grid.RowDefinitions>
+            <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" Grid.ColumnSpan="2"/>
+            <TextBox Name="txtBox" Grid.Row="2" Grid.ColumnSpan="2" TextWrapping="NoWrap" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" GotFocus="TxtBox_GotFocus"  />
+
+
+            <StackPanel Grid.Column="1">
+                <GroupBox x:Name="pnlAudio" Header="Audio Streaming" Grid.RowSpan="2">
+                    <StackPanel>
+                        <UniformGrid Rows="1">
+                            <Button x:Name="btnAudioStreamOn" Content="Audio On"  Click="BtnAudioStreamOn_Click" />
+                            <Button x:Name="btnAudioStreamOff" Content="Audio Off"  Click="BtnAudioStreamOff_Click" />
+                        </UniformGrid>
+                        <ComboBox x:Name="cbxSounds" />
+                        <Button x:Name="btnAudioRecord" Content="Send Sound"  Click="BtnAudioRecord_Click" />
+                        <Button Content="Button" Click="Button_Click"/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Accessories" Grid.Column="1" >
+                    <StackPanel>
+                        <CheckBox x:Name="chkBowl"  Content="Bowl" ToolTip="Disable jump if I wear Bowl" Checked="ChkBowl_Checked" Unchecked="ChkBowl_Unchecked" />
+                        <CheckBox x:Name="chkBox" IsEnabled="False" Content="Automatic Box (y:open x:close)" />
+                        <CheckBox x:Name="chkBoost" IsEnabled="False" Content="Boost Speed (4)" />
+                        <Slider x:Name="slLight"  Canvas.Left="10" Canvas.Top="123" Width="182" ValueChanged="SlLight_ValueChanged"  />
+                        <Label Content="Light (e:on q:off) :" />
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox x:Name="panelSettings" Header="Settings" Grid.Column="1" Grid.Row="1" >
+                    <StackPanel>
+                        <UniformGrid Columns="2" >
+                            <Label Content="Volume" />
+                            <Slider x:Name="slVolume" Maximum="100" Thumb.DragCompleted="SlVolume_DragCompleted"/>
+                            <Label Content="Audio Theme" />
+                            <ComboBox x:Name="cbxAudioTheme" SelectionChanged="CbxAudioTheme_SelectionChanged"/>
+                            <Label Content="Wifi Band" />
+                            <ComboBox x:Name="cbxWifiBand" SelectionChanged="cbxWifiBand_SelectionChanged"/>
+                        </UniformGrid>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+                    <Label x:Name="lblBatteryLevel" Content="BatteryLevel : N/A" />
+                    <Label x:Name="lblRssi" Content="Rssi : N/A" Canvas.Left="25" />
+                    <Label x:Name="lblPostureState" Content="PostureStateName : N/A"  />
+                    <Label x:Name="lblQuality" Content="Quality link: N/A"  />
+                </StackPanel>
+                <Image  Name="imgMain" MouseLeftButtonDown="ImgMain_MouseLeftButtonDown"/>
+            </DockPanel>
+        </Grid>
+    </DockPanel>
 </Window>

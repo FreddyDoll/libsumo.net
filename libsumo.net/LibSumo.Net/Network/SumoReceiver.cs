@@ -20,7 +20,7 @@ namespace LibSumo.Net.Network
     /// <summary>
     /// Receives data from the Jumping Sumo
     /// </summary>
-    internal class SumoReceiver
+    public class SumoReceiver
     {
         #region Properties
         public string Host { get; set; }
@@ -126,7 +126,7 @@ namespace LibSumo.Net.Network
                             break;
                         }
                         // Process the next frame
-                        this._process_frame(frame);
+                        //this._process_frame(frame);
                     }
                 }
                 catch (Exception e)
@@ -141,6 +141,7 @@ namespace LibSumo.Net.Network
         
         private void _process_frame(byte[] frame)
         {
+            LOGGER.GetInstance.Info("Loop");
             var Result = _read_header(frame);
             byte data_type = Result.Item1;
             byte buffer_id = Result.Item2;
@@ -516,6 +517,11 @@ namespace LibSumo.Net.Network
             SumoEvents?.Invoke(this, e);
         }
         #endregion
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
 
     }
 

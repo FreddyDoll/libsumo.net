@@ -139,22 +139,27 @@ namespace SumoApplication
 
 
              var speed = (-activeController.TriggerLeftPosition + activeController.TriggerRightPosition) /100;
-             var turn = (activeController.ThumbLeftX -50) /100;
+             var turn = (activeController.ThumbLeftX -50) /50;
+
+            turn = Math.Pow(turn, 3);
+            turn *= 0.6;
+
 
             var c1Turn = 0.8;
             filtTur = filtTur * c1Turn + (1 - c1Turn) * turn;
             var c1speed = 0.8;
             filtSpeed = filtSpeed * c1speed + (1 - c1speed) * speed;
 
+
             speed = filtSpeed;
             turn = filtTur;
 
-            speed *= 127;
-            turn *= 127;
+            speed *= 100;
+            turn *= 100;
 
             //Limit
-            if (speed > 127) speed = 127;
-            if (speed < -127) speed = -127;
+            if (speed > 100) speed = 100;
+            if (speed < -100) speed = -100;
 
             //Limit
             if (turn > 100) turn = 100;
@@ -696,6 +701,22 @@ namespace SumoApplication
                 this.Visibility = Visibility.Visible;
                 this.imgMain = this.TempImage;
             }
+        }
+
+        private void enableVideo_Click(object sender, RoutedEventArgs e)
+        {
+            controller.EnableVideo();
+        }
+
+        private void disableVideo_Click(object sender, RoutedEventArgs e)
+        {
+            controller.DisableVideo();
+        }
+
+        private void wifi_Click(object sender, RoutedEventArgs e)
+        {
+            controller.receiver.ToString();
+            controller.SendWifi();
         }
     }     
 

@@ -1,15 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2024
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32819.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibSumo.Net", "LibSumo.Net\LibSumo.Net.csproj", "{E238547C-D7A4-45BE-B500-1DE101E4FBA3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SumoApplication", "SumoApplication\SumoApplication.csproj", "{26D00331-C66A-4696-99C2-AD9288A05FCC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ARSdk3To.Net ConvertTools", "ARSdk3To.Net Helpers\ARSdk3To.Net ConvertTools.csproj", "{0BB8B232-021F-47DF-AA85-68829CDDE86E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DroneMaxApp", "DroneMaxApp\DroneMaxApp.csproj", "{78BD0186-4B76-435B-8448-40B572A282A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,26 +69,6 @@ Global
 		{0BB8B232-021F-47DF-AA85-68829CDDE86E}.Release|x64.Build.0 = Release|Any CPU
 		{0BB8B232-021F-47DF-AA85-68829CDDE86E}.Release|x86.ActiveCfg = Release|Any CPU
 		{0BB8B232-021F-47DF-AA85-68829CDDE86E}.Release|x86.Build.0 = Release|Any CPU
-		{78BD0186-4B76-435B-8448-40B572A282A5}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{78BD0186-4B76-435B-8448-40B572A282A5}.Debug|ARM.ActiveCfg = Debug|ARM
-		{78BD0186-4B76-435B-8448-40B572A282A5}.Debug|ARM.Build.0 = Debug|ARM
-		{78BD0186-4B76-435B-8448-40B572A282A5}.Debug|ARM.Deploy.0 = Debug|ARM
-		{78BD0186-4B76-435B-8448-40B572A282A5}.Debug|x64.ActiveCfg = Debug|x64
-		{78BD0186-4B76-435B-8448-40B572A282A5}.Debug|x64.Build.0 = Debug|x64
-		{78BD0186-4B76-435B-8448-40B572A282A5}.Debug|x64.Deploy.0 = Debug|x64
-		{78BD0186-4B76-435B-8448-40B572A282A5}.Debug|x86.ActiveCfg = Debug|x86
-		{78BD0186-4B76-435B-8448-40B572A282A5}.Debug|x86.Build.0 = Debug|x86
-		{78BD0186-4B76-435B-8448-40B572A282A5}.Debug|x86.Deploy.0 = Debug|x86
-		{78BD0186-4B76-435B-8448-40B572A282A5}.Release|Any CPU.ActiveCfg = Release|x86
-		{78BD0186-4B76-435B-8448-40B572A282A5}.Release|ARM.ActiveCfg = Release|ARM
-		{78BD0186-4B76-435B-8448-40B572A282A5}.Release|ARM.Build.0 = Release|ARM
-		{78BD0186-4B76-435B-8448-40B572A282A5}.Release|ARM.Deploy.0 = Release|ARM
-		{78BD0186-4B76-435B-8448-40B572A282A5}.Release|x64.ActiveCfg = Release|x64
-		{78BD0186-4B76-435B-8448-40B572A282A5}.Release|x64.Build.0 = Release|x64
-		{78BD0186-4B76-435B-8448-40B572A282A5}.Release|x64.Deploy.0 = Release|x64
-		{78BD0186-4B76-435B-8448-40B572A282A5}.Release|x86.ActiveCfg = Release|x86
-		{78BD0186-4B76-435B-8448-40B572A282A5}.Release|x86.Build.0 = Release|x86
-		{78BD0186-4B76-435B-8448-40B572A282A5}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

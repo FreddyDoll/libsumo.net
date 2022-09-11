@@ -30,7 +30,7 @@ namespace LibSumo.Net
         private int fragment_size;
         private int fragments_per_frame;
 
-        private SumoReceiver receiver;
+        public SumoReceiver receiver;
         private SumoVideo video;
         private SumoAudioPlayer audioPlayer;
         private SumoAudioRecorder audioRecorder;
@@ -486,17 +486,23 @@ namespace LibSumo.Net
 
         #endregion
 
-        internal void EnableVideo()
+        public void EnableVideo()
         {
-            this.sender.Send(SumoCommandsGenerated.MediaStreaming_VideoEnable_cmd(1));// Commands.Set_media_streaming_cmd(true));            
+            this.sender.Send(SumoCommandsGenerated.MediaStreaming_VideoEnable_cmd(1));// Commands.Set_media_streaming_cmd(true));     
         }
-        internal void DisableVideo()
+        public void DisableVideo()
         {
             this.sender.Send(SumoCommandsGenerated.MediaStreaming_VideoEnable_cmd(0)); // Commands.Set_media_streaming_cmd(false));
         }
 
+        public void SendWifi()
+        {
+            this.sender.Send(SumoCommandsGenerated.Network_WifiScan_cmd(SumoEnumGenerated.WifiScan_band.all)); // Commands.Set_media_streaming_cmd(false));
+        }
+
+
         #region Accessory BOX
-       
+
 
         public void OpenBox()
         {            

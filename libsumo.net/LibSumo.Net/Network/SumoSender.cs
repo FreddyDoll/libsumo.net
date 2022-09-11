@@ -28,7 +28,7 @@ namespace LibSumo.Net.Network
     /// <summary>
     /// Sends commands to the Jumping Sumo. PCMD commands are sent at a fixed frequency (every 25ms)
     /// </summary>
-    internal class SumoSender
+    public class SumoSender
     {
 
         #region Properties
@@ -78,11 +78,11 @@ namespace LibSumo.Net.Network
             {
                 LOGGER.GetInstance.Info("[SumoSender] Thread Started");                
                 while (isConnected)
-                {                                       
+                {                            
                     sumoSocket.Send(this.cmd, this.cmd.Length, SumoRemote);
                     this.cmd = SumoCommandsCustom._pack_frame(SumoCommandsCustom.Move_cmd(0, 0));                    
                     Thread.Sleep(40);
-                }                
+                }                  
             }
             catch(Exception e)
             {
@@ -120,7 +120,8 @@ namespace LibSumo.Net.Network
                 if (cmd != null)
                 {                                       
                     byte[] frame = this._update_seq(SumoCommandsCustom._pack_frame(cmd));
-                    if (SumoCommandsCustom._is_pcmd(frame)) this.cmd = frame;                        
+                    if (SumoCommandsCustom._is_pcmd(frame)) 
+                        this.cmd = frame;                        
                     else sumoSocket.Send(frame, frame.Length, SumoRemote);                                                                        
                 }
             }
