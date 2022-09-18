@@ -84,7 +84,7 @@ namespace LibSumo.Net.Events
         public List<Capability> BuildDefaultCapabilities()
         {            
             AddCapabilities(SumoInformations.Capability.Jump);
-            PingBox();
+            //PingBox(); //Frederik Doll: This caused the udp stream to shut down for jumping sumo.
             return Capabilities;
         }
         /// <summary>

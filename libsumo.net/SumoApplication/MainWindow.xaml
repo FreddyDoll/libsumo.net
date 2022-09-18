@@ -9,7 +9,7 @@
 
     <DockPanel  LastChildFill="True">
         <StackPanel Name="panelJump"  DockPanel.Dock="Top"  Orientation="Horizontal">
-            <Label x:Name="lblFramerate" Content="Framerate" Canvas.Left="17" Canvas.Top="3" />
+            <Label x:Name="lblFramerate" Content="Framerate" Canvas.Left="17" Canvas.Top="3" Width="150" />
             <Button x:Name="btnLongJump" Content="Long Jump"  Width="75" Canvas.Left="109" Canvas.Top="19" Click="BtnLongJump_Click"/>
             <Button x:Name="btnHighJump" Content="High Jump"  Width="75" Canvas.Left="209" Canvas.Top="19" Click="BtnHighJump_Click"/>
             <Button x:Name="btnKick" Content="Load Spring"  Width="75" Canvas.Left="309" Canvas.Top="19" Click="BtnKick_Click" ToolTip="Only in Kicker Posture (F2). Press LongJump to release"/>
@@ -32,7 +32,6 @@
                     <Button x:Name="enableVideo" Content="Enable Video" Click="enableVideo_Click" />
                     <Button x:Name="disableVideo" Content="Disable Video" Click="disableVideo_Click"/>
                     <Button x:Name="wifi" Content="WIFI" Click="wifi_Click"/>
-                    <TextBox Name="FakeTxtBox" Height="23" Canvas.Left="23" TextWrapping="Wrap"  Canvas.Top="467" Width="34" Opacity="0"/>
                 </StackPanel>
                 <StackPanel x:Name="stckPanel1"/>
             </DockPanel>
@@ -49,7 +48,7 @@
                 <RowDefinition Height="150"/>
             </Grid.RowDefinitions>
             <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" Grid.ColumnSpan="2"/>
-            <TextBox Name="txtBox" Grid.Row="2" Grid.ColumnSpan="2" TextWrapping="NoWrap" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" GotFocus="TxtBox_GotFocus"  />
+            <TextBox Name="txtBox" IsReadOnly="True" Grid.Row="2" Grid.ColumnSpan="2" TextWrapping="NoWrap" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" />
 
 
             <StackPanel Grid.Column="1">

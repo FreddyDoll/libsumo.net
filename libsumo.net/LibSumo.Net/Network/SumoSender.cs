@@ -5,6 +5,7 @@ using LibSumo.Net.Protocol;
 using System;
 using System.Collections.Concurrent;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -80,7 +81,7 @@ namespace LibSumo.Net.Network
                 while (isConnected)
                 {                            
                     sumoSocket.Send(this.cmd, this.cmd.Length, SumoRemote);
-                    this.cmd = SumoCommandsCustom._pack_frame(SumoCommandsCustom.Move_cmd(0, 0));                    
+                    this.cmd = SumoCommandsCustom._pack_frame(SumoCommandsCustom.Move_cmd(0, 0));
                     Thread.Sleep(40);
                 }                  
             }
@@ -120,9 +121,10 @@ namespace LibSumo.Net.Network
                 if (cmd != null)
                 {                                       
                     byte[] frame = this._update_seq(SumoCommandsCustom._pack_frame(cmd));
-                    if (SumoCommandsCustom._is_pcmd(frame)) 
-                        this.cmd = frame;                        
-                    else sumoSocket.Send(frame, frame.Length, SumoRemote);                                                                        
+                    if (SumoCommandsCustom._is_pcmd(frame))
+                        this.cmd = frame;
+                    else
+                        sumoSocket.Send(frame, frame.Length, SumoRemote);                                                                        
                 }
             }
         }

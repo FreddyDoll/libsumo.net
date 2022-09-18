@@ -125,8 +125,9 @@ namespace LibSumo.Net.Network
                         {
                             break;
                         }
+                        //LOGGER.GetInstance.Debug("*Udp packet received");
                         // Process the next frame
-                        //this._process_frame(frame);
+                        this._process_frame(frame);
                     }
                 }
                 catch (Exception e)
@@ -141,7 +142,6 @@ namespace LibSumo.Net.Network
         
         private void _process_frame(byte[] frame)
         {
-            LOGGER.GetInstance.Info("Loop");
             var Result = _read_header(frame);
             byte data_type = Result.Item1;
             byte buffer_id = Result.Item2;
@@ -160,7 +160,7 @@ namespace LibSumo.Net.Network
                 if (data_type == (byte)SumoConstantsCustom.ARNETWORKAL_FRAME_TYPE.ARNETWORKAL_FRAME_TYPE_DATA_WITH_ACK)
                 {
                     byte[] ack = _create_ack_packet(data_type, buffer_id, seq_no);
-                    this._sender.SendAck(ack);
+                    this._sender.SendAck(ack); 
                     //LOGGER.GetInstance.Debug(String.Format("Sending ACK for {0} {1} {2} {3}", data_type, buffer_id, seq_no, frame_size));
                 }
 

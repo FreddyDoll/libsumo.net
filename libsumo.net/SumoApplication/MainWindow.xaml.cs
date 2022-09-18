@@ -510,13 +510,11 @@ namespace SumoApplication
         {
             btnEnableMultiDrones.Visibility = Visibility.Hidden;
             controller.Connect();
-            FakeTxtBox.Focus();
         }
         private void BtnDisconnect_Click(object sender, RoutedEventArgs e)
         {
             controller.Disconnect();
             SetSplashImage();
-            FakeTxtBox.Focus();
         }
 
         private void BtnSaveLog_Click(object sender, RoutedEventArgs e)
@@ -527,37 +525,30 @@ namespace SumoApplication
         private void BtnLongJump_Click(object sender, RoutedEventArgs e)
         {            
             controller.StartJump(LibSumo.Net.Protocol.SumoEnumGenerated.Jump_type._long);
-            FakeTxtBox.Focus();
         }
         private void BtnHighJump_Click(object sender, RoutedEventArgs e)
         {
             controller.StartJump(LibSumo.Net.Protocol.SumoEnumGenerated.Jump_type.high);
-            FakeTxtBox.Focus();
         }
         private void BtnKick_Click(object sender, RoutedEventArgs e)
         {
             controller.JumpLoad();
-            FakeTxtBox.Focus();
         }
         private void BtnCancelJump_Click(object sender, RoutedEventArgs e)
         {
             controller.CancelJump();
-            FakeTxtBox.Focus();
         }
         private void BtnSTOP_Click(object sender, RoutedEventArgs e)
         {
             controller.STOP();
-            FakeTxtBox.Focus();
         }
         private void CbxAudioTheme_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {            
             controller.SetAudioTheme((SumoEnumGenerated.Theme_theme)cbxAudioTheme.SelectedItem);
-            FakeTxtBox.Focus();
         }
         private void SlVolume_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
         {
             controller.ChangeVolume((byte)slVolume.Value);
-            FakeTxtBox.Focus();
         }
         private void GetInstance_MessageAvailable(object sender, MessageEventArgs e)
         {
@@ -571,10 +562,6 @@ namespace SumoApplication
 
        
 
-        private void TxtBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-            FakeTxtBox.Focus();
-        }
 
         private void BtnAudioRecord_Click(object sender, RoutedEventArgs e)
         {
@@ -586,26 +573,22 @@ namespace SumoApplication
             {                
                 controller.StreamAudioToDrone(item);
             }
-            FakeTxtBox.Focus();
         }
 
         private void SlLight_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             // Send Light level to Drone
             controller.Headlight_Value(e.NewValue);
-            FakeTxtBox.Focus();
         }
 
         private void BtnAudioStreamOn_Click(object sender, RoutedEventArgs e)
         {
             controller.SetAudioDroneTX(true);
-            FakeTxtBox.Focus();
         }
 
         private void BtnAudioStreamOff_Click(object sender, RoutedEventArgs e)
         {
             controller.SetAudioDroneTX(false);
-            FakeTxtBox.Focus();
         }
 
 
@@ -630,19 +613,16 @@ namespace SumoApplication
         {                        
             controller.RemoveCapabilities(SumoInformations.Capability.Jump );
             InitUI();
-            FakeTxtBox.Focus();
         }
 
         private void ChkBowl_Unchecked(object sender, RoutedEventArgs e)
         {            
             InitUI();
-            FakeTxtBox.Focus();
         }
 
         private void cbxWifiBand_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             controller.setWifiBand((SumoEnumGenerated.WifiSelection_band)cbxWifiBand.SelectedItem);
-            FakeTxtBox.Focus();
         }
 
         private void btnSimulate_Click(object sender, RoutedEventArgs e)
